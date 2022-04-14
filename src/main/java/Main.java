@@ -7,12 +7,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
+import java.util.concurrent.Executors;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 8);
         server.createContext("/test", new TestHandler());
+        server.setExecutor(Executors.newCachedThreadPool());
         server.start();
     }
 
